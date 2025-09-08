@@ -3,7 +3,21 @@ import java.util.HashMap;
 import java.util.Stack;
 
 public class Validparanthesis_20 {
-    static boolean isValid(String s){
+    static boolean optimized(String s){
+        Stack<Character> st=new Stack<>();
+        for(char c:s.toCharArray()){
+            if(c=='[')
+                st.push(']');
+            else if(c=='(')
+                st.push(')');
+            else if(c=='{')
+                st.push('}');
+            else if(st.isEmpty() || st.pop()!=c)
+                return false;
+        }
+        return st.isEmpty();
+    }
+    static boolean bruteForce(String s){
         char[] ch=s.toCharArray();
         HashMap<Character,Character> map=new HashMap<>();
         map.put('}','{');
@@ -26,7 +40,7 @@ public class Validparanthesis_20 {
     }
     public static void main(String[] args) {
         String s="{[(]}";
-        Boolean result=isValid(s);
+        Boolean result=bruteForce(s);
         System.out.println(result);
     }
 }
